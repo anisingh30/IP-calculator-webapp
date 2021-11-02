@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8" xmlns:th="www.thymelaeaf.org">
+    <title>IP-Calculator</title>
+</head>
+<body>
+<h1>IP-Calculator</h1>
+<div style="float:left">
+    <h2>Network overview</h2>
+    <div style="width:120px; float:left">
+        <p>IP-Address:</p>
+        <p>Subnetmask:</p>
+        <p>Net-ID:</p>
+        <p>Broadcast:</p>
+    </div>
+    <div style="width:150; float:left">
+        <p th:text="${ipAddress}"></p>
+        <p th:text="${subNetMask}"></p>
+        <p>192.168.1.0</p>
+        <p>192.168.1.254</p>
+    </div>
+</div>
+
+</body>
+</html>
