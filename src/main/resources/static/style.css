@@ -22,6 +22,12 @@ button {
         background-color: #6f71a1;
         font-size: 16px;
         margin: 20px 25px;
+        font-family: 'PT Serif', serif;
+}
+
+button:hover {
+    background-color: #0e1082;
+    color: white;
 }
 
 label {
@@ -41,4 +47,5 @@ div{
 
 input {
     border-radius: 5px;
+    font-family: 'PT Serif', serif;
 }
