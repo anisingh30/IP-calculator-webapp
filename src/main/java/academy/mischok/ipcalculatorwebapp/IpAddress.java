@@ -7,18 +7,37 @@ import java.util.stream.Collectors;
 
 public class IpAddress {
 
+    private String ipAddress = "";
+
+    public String getIpAddress() {
+        return ipAddress;
+    }
+
+    public void setIpAddress(String ipAddress) {
+        this.ipAddress = ipAddress;
+    }
+
+
+
+
     private int first;
     private int second;
     private int third;
     private int fourth;
 
+    public IpAddress() {}
+
     public IpAddress(String address) {
         ipInput(address);
     }
-
+    public IpAddress(int first, int second, int third, int fourth) {
+        this.setFirst(first);
+        this.setSecond(second);
+        this.setThird(third);
+        this.setFourth(fourth);
+    }
     private void ipInput (String input){
         Objects.requireNonNull(input);
-
         List<String> ipList = Arrays.asList(input.split("\\."));
 
         // converts a list of strings into a list of integer
@@ -48,7 +67,7 @@ public class IpAddress {
     }
 
     public void setSecond(int second) {
-        if (second > 255) {
+        if (second < 0 || second > 255) {
             throw new IllegalArgumentException("second byte is out of bounds!");
         }
         this.second = second;
@@ -59,7 +78,7 @@ public class IpAddress {
     }
 
     public void setThird(int third) {
-        if (third > 255) {
+        if (third < 0 || third > 255) {
             throw new IllegalArgumentException("third byte is out of bounds!");
         }
         this.third = third;
@@ -70,7 +89,7 @@ public class IpAddress {
     }
 
     public void setFourth(int fourth) {
-        if (fourth > 255) {
+        if (fourth < 0 || fourth > 255) {
             throw new IllegalArgumentException("fourth byte is out of bounds!");
         }
         this.fourth = fourth;
@@ -82,9 +101,9 @@ public class IpAddress {
     }
 
     public String toBinaryString() {
-        String result = ipComponentToBinaryByte(this.first);
-        result += ipComponentToBinaryByte(this.second);
-        result += ipComponentToBinaryByte(this.third);
+        String result = ipComponentToBinaryByte(this.first) + ".";
+        result += ipComponentToBinaryByte(this.second) + ".";
+        result += ipComponentToBinaryByte(this.third) + ".";
         result += ipComponentToBinaryByte(this.fourth);
 
         return result;
@@ -99,5 +118,22 @@ public class IpAddress {
 
         return componentBin;
     }
+    public IpAddress logicalAnd(IpAddress another) {
+        Objects.requireNonNull(another);
+
+        int first = this.getFirst() & another.getFirst();
+        int second = this.getSecond() & another.getSecond();
+        int third = this.getThird() & another.getThird();
+        int fourth = this.getFourth() & another.getFourth();
+
+        IpAddress result = new IpAddress();
+        result.setFirst(first);
+        result.setSecond(second);
+        result.setThird(third);
+        result.setFourth(fourth);
+
+        return result;
+    }
+
 
 }
