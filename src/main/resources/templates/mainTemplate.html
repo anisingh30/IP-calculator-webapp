@@ -2,7 +2,35 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8" xmlns:th="www.thymelaeaf.org">
-    <title>IP-Calculator</title>
+    <title>IP Calculator</title>
+
+    <style>
+        body {
+        background-color: #1e2021;
+        }
+
+        h1 {
+        color: white;
+        }
+
+        h2 {
+        color: white;
+        }
+
+        h4 {
+        color: white;
+        }
+
+        a {
+        color: red;
+        }
+
+        p {
+        color: white;
+        }
+
+    </style>
+
 </head>
 <body>
 <h1>IP-Calculator</h1>
@@ -15,6 +43,7 @@
         <p>Net-ID:</p>
         <p>Broadcast:</p>
         <p>Max Clients:</p>
+        <a href="/input">Startpage...</a>
     </div>
     <div style="width:200px; float:left">
         <h4>Decimal</h4>
@@ -32,7 +61,6 @@
         <p th:text="${broadcastBinary}"></p>
     </div>
 </div>
-
 
 </body>
 </html>
