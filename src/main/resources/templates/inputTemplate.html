@@ -4,51 +4,27 @@
     <meta charset="UTF-8" xmlns:th="www.thymelaeaf.org">
     <title>IP Calculator</title>
 
-    <style>
-        body {
-        background-color: #1e2021;
-        }
-
-        h1 {
-        color: white;
-        }
-
-        button {
-        width: 100px;
-        height: 30px;
-        border-radius: 15px;
-        color: white;
-        cursor: pointer;
-        background-color: #6f71a1;
-        font-size: 16px;
-        margin: 20px 25px;
-        }
-
-        label {
-        display: inline-block;
-        width: 120px;
-        color: white;
-        }
-
-    </style>
+    <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
-<h1>IP-Calculator</h1>
-<div>
-    <form method="get" action="main">
-        <div>
-            <label for="ipAddress">Ip-Address:</label>
-            <input id="ipAddress" placeholder="Enter IP Address" name="ipAddress" required type="text" autofocus />
-        </div>
-        <div>
-            <label for="subnetMask">Subnetmask:</label>
-            <input id="subnetMask" placeholder="Enter Subnetmask" name="subNetMask" required type="text" />
-        </div>
-        <div>
-            <button type="submit" value="Submit">Submit</button>
-            <button type="reset" value="Reset">Reset</button>
-        </div>
-    </form>
+<div style="width:350px; margin:auto; padding-top:200px;">
+    <h1>IP-Calculator</h1>
+    <div>
+        <form method="get" action="main">
+            <div>
+                <label for="ipAddress">Ip-Address:</label>
+                <input id="ipAddress" placeholder="Enter IP Address" name="ipAddress" required type="text" autofocus />
+            </div>
+            <div>
+                <label for="subnetMask">Subnetmask:</label>
+                <input id="subnetMask" placeholder="Enter Subnetmask" name="subNetMask" required type="text" />
+            </div>
+            <div>
+                <button type="submit" value="Submit">Submit</button>
+                <button type="reset" value="Reset">Reset</button>
+            </div>
+        </form>
+    </div>
 </div>
 </body>
 </html>

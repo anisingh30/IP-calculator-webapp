@@ -4,63 +4,39 @@
     <meta charset="UTF-8" xmlns:th="www.thymelaeaf.org">
     <title>IP Calculator</title>
 
-    <style>
-        body {
-        background-color: #1e2021;
-        }
-
-        h1 {
-        color: white;
-        }
-
-        h2 {
-        color: white;
-        }
-
-        h4 {
-        color: white;
-        }
-
-        a {
-        color: red;
-        }
-
-        p {
-        color: white;
-        }
-
-    </style>
+    <link rel="stylesheet" href="style.css"/>
 
 </head>
 <body>
-<h1>IP-Calculator</h1>
-<div style="width:680px; float:left">
-    <h2>Network overview</h2>
-    <div style="width:120px; float:left">
-        <h4>Type</h4>
-        <p>IP-Address:</p>
-        <p>Subnetmask:</p>
-        <p>Net-ID:</p>
-        <p>Broadcast:</p>
-        <p>Max Clients:</p>
-        <a href="/input">Startpage...</a>
-    </div>
-    <div style="width:200px; float:left">
-        <h4>Decimal</h4>
-        <p th:text="${ipAddress}"></p>
-        <p th:text="${subNetMask}"></p>
-        <p th:text="${netId}"></p>
-        <p th:text="${broadcast}"></p>
-        <p th:text="${clients}"></p>
-    </div>
-    <div style="width:350px; float:left">
-        <h4>Binary</h4>
-        <p th:text="${ipBinary}"></p>
-        <p th:text="${snmBinary}"></p>
-        <p th:text="${netIdBinary}"></p>
-        <p th:text="${broadcastBinary}"></p>
+<div style="width:680px; margin:auto; padding-top:200px;">
+    <h1>IP-Calculator</h1>
+    <div>
+        <h2>Network overview</h2>
+        <div style="width:120px; float:left">
+            <h4>Type</h4>
+            <p>IP-Address:</p>
+            <p>Subnetmask:</p>
+            <p>Net-ID:</p>
+            <p>Broadcast:</p>
+            <p>Max Clients:</p>
+            <a href="/input">Startpage...</a>
+        </div>
+        <div style="width:200px; float:left">
+            <h4>Decimal</h4>
+            <p th:text="${ipAddress}"></p>
+            <p th:text="${subNetMask}"></p>
+            <p th:text="${netId}"></p>
+            <p th:text="${broadcast}"></p>
+            <p th:text="${clients}"></p>
+        </div>
+        <div style="width:350px; float:left">
+            <h4>Binary</h4>
+            <p th:text="${ipBinary}"></p>
+            <p th:text="${snmBinary}"></p>
+            <p th:text="${netIdBinary}"></p>
+            <p th:text="${broadcastBinary}"></p>
+        </div>
     </div>
 </div>
-
 </body>
 </html>

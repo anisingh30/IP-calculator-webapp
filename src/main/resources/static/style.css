@@ -1,0 +1,43 @@
+body {
+      background-color: #1e2021;
+}
+
+h1 {
+    color: white;
+}
+
+h2 {
+    color: white;
+}
+
+h4 {
+    color: white;
+}
+
+a {
+    color: red;
+}
+
+p {
+    color: white;
+}
+
+button {
+        width: 100px;
+        height: 30px;
+        border-radius: 15px;
+        color: white;
+        cursor: pointer;
+        background-color: #6f71a1;
+        font-size: 16px;
+        margin: 20px 25px;
+}
+
+label {
+        display: inline-block;
+        width: 120px;
+        color: white;
+}
+div{
+    margin-top: 10px
+}
