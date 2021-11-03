@@ -41,3 +41,7 @@ label {
 div{
     margin-top: 10px
 }
+.div-center{
+            margin: auto;
+            padding-top: 200px;
+}
