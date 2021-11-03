@@ -1,17 +1,8 @@
 body {
       background-color: #1e2021;
-}
-
-h1 {
-    color: white;
-}
-
-h2 {
-    color: white;
-}
-
-h4 {
-    color: white;
+      font-family: 'PT Serif', serif;
+      font-size: 18px;
+      color: white;
 }
 
 a {
@@ -38,10 +29,16 @@ label {
         width: 120px;
         color: white;
 }
+
 div{
     margin-top: 10px
 }
+
 .div-center{
             margin: auto;
             padding-top: 200px;
+}
+
+input {
+    border-radius: 5px;
 }
