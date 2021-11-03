@@ -20,8 +20,6 @@ public class SubnetMask extends IpAddress {
                 count++;
             }
         }
-        //String cidr = Integer.toString(count);
-
         return count;
     }
 

@@ -7,19 +7,6 @@ import java.util.stream.Collectors;
 
 public class IpAddress {
 
-    private String ipAddress = "";
-
-    public String getIpAddress() {
-        return ipAddress;
-    }
-
-    public void setIpAddress(String ipAddress) {
-        this.ipAddress = ipAddress;
-    }
-
-
-
-
     private int first;
     private int second;
     private int third;
@@ -134,6 +121,5 @@ public class IpAddress {
 
         return result;
     }
-
 
 }

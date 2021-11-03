@@ -3,7 +3,6 @@ package academy.mischok.ipcalculatorwebapp;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Objects;
@@ -43,8 +42,6 @@ public class IpCalculatorController {
 
     @GetMapping("input")
     public String input(){
-        IpAddress ipAddress = new IpAddress();
-
         return "inputTemplate";
     }
 
