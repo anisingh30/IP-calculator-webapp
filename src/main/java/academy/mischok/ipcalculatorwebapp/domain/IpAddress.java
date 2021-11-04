@@ -1,4 +1,4 @@
-package academy.mischok.ipcalculatorwebapp;
+package academy.mischok.ipcalculatorwebapp.domain;
 
 import java.util.Arrays;
 import java.util.List;

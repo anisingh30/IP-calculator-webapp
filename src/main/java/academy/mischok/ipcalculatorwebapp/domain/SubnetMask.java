@@ -1,14 +1,19 @@
-package academy.mischok.ipcalculatorwebapp;
+package academy.mischok.ipcalculatorwebapp.domain;
+
+import academy.mischok.ipcalculatorwebapp.domain.IpAddress;
 
 public class SubnetMask extends IpAddress {
 
     public SubnetMask(String ipInput) {
         super(ipInput);
     }
+    public SubnetMask(int ipInput) {
+        cidrToSnm(ipInput);
+    }
 
 
-    public int getCidr() {
 
+    public int writeCidr() {
         String resultBinary = this.toBinaryString();
 
         int count = 0;
@@ -48,8 +53,8 @@ public class SubnetMask extends IpAddress {
 
     @Override
     public void setSecond(int second) {
-        if (second < 0 || second > 255 && !checkSnm(second)) {
-            throw new IllegalArgumentException("first byte is out of bounds!");
+        if (second < 0 || second > 255 && !checkSnm(second) || second != 0 && getFirst() < 255) {
+            throw new IllegalArgumentException("second byte is out of bounds!");
         }
 
         super.setSecond(second);
@@ -57,16 +62,16 @@ public class SubnetMask extends IpAddress {
 
     @Override
     public void setThird(int third) {
-        if (third < 0 || third > 255 && !checkSnm(third)) {
-            throw new IllegalArgumentException("first byte is out of bounds!");
+        if (third < 0 || third > 255 && !checkSnm(third) || third != 0 && getSecond() < 255) {
+            throw new IllegalArgumentException("third byte is out of bounds!");
         }
         super.setThird(third);
     }
 
     @Override
     public void setFourth(int fourth) {
-        if (fourth < 0 || fourth > 255 && !checkSnm(fourth)) {
-            throw new IllegalArgumentException("first byte is out of bounds!");
+        if (fourth < 0 || fourth > 255 && !checkSnm(fourth) || fourth != 0 && getThird() < 255) {
+            throw new IllegalArgumentException("fourth byte is out of bounds!");
         }
         super.setFourth(fourth);
     }
@@ -81,5 +86,36 @@ public class SubnetMask extends IpAddress {
             }
         }
         return false;
+    }
+
+    private String cidrToSnm(int cidr){
+        if (cidr < 0 || cidr > 32){
+            throw new IllegalArgumentException("CIDR is out of bounds!");
+        }
+        String cidrString = "";
+
+        switch (cidr / 8){
+            case 4:
+                cidrString = "255.255.255.255";
+                break;
+            case 3:
+                cidrString = "255.255.255." + calcCidrOctet(cidr) ;
+                break;
+            case 2:
+                cidrString = "255.255." + calcCidrOctet(cidr) + ".0";
+                break;
+            case 1:
+                cidrString = "255." + calcCidrOctet(cidr) + ".0.0";
+                break;
+            case 0:
+                cidrString = calcCidrOctet(cidr) + ".0.0.0";
+                break;
+        }
+        return cidrString;
+    }
+
+    private int calcCidrOctet(int cidr){
+        int rest = cidr % 8;
+        return (int)(256 - Math.pow(2, (8-rest)));
     }
 }
