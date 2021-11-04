@@ -21,6 +21,10 @@ public class IpCalculatorController {
         System.out.println("form: " + networkInputForm);
         System.out.println("bindingResult: " + bindingResult);
 
+        if (!Objects.isNull(networkInputForm.getCidr()) && networkInputForm.getSubNetMask() != ""){
+            bindingResult.rejectValue("ipAddress", "invalid.snmCidr", "Please insert just the CIDR or the Subnetmask.");
+        }
+
         validate(networkInputForm, bindingResult);
 
         if (bindingResult.hasErrors()) {
@@ -28,8 +32,16 @@ public class IpCalculatorController {
         }
 
         try {
+
             IpAddress getIp = new IpAddress(networkInputForm.getIpAddress());
-            SubnetMask getSnm = new SubnetMask(networkInputForm.getSubNetMask());
+            SubnetMask getSnm;
+
+            if(networkInputForm.getSubNetMask() != ""){
+                getSnm = new SubnetMask(networkInputForm.getSubNetMask());
+            }
+            else{
+                getSnm = SubnetMask.fromCidrSuffix(networkInputForm.getCidr());
+            }
 
             IpAddress netId = calculateNetId(getIp, getSnm);
             int cidr = getSnm.writeCidr();
@@ -65,7 +77,7 @@ public class IpCalculatorController {
             }
         }
 
-        if (!bindingResult.hasFieldErrors("subNetMask")) {
+        if (!bindingResult.hasFieldErrors("subNetMask") && networkInputForm.getSubNetMask() != "")  {
             try {
                 new SubnetMask(networkInputForm.getSubNetMask());
             } catch (IllegalArgumentException e) {
@@ -73,7 +85,7 @@ public class IpCalculatorController {
             }
         }
 
-        if (!bindingResult.hasFieldErrors("cidr")) {
+        if (!bindingResult.hasFieldErrors("cidr") && !Objects.isNull(networkInputForm.getCidr())) {
             try {
                 new SubnetMask(networkInputForm.getCidr());
             } catch (IllegalArgumentException e) {

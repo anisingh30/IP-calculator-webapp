@@ -2,16 +2,25 @@ package academy.mischok.ipcalculatorwebapp.domain;
 
 import academy.mischok.ipcalculatorwebapp.domain.IpAddress;
 
+import java.util.Objects;
+
 public class SubnetMask extends IpAddress {
 
     public SubnetMask(String ipInput) {
         super(ipInput);
     }
-    public SubnetMask(int ipInput) {
-        cidrToSnm(ipInput);
+
+    public SubnetMask(Integer ipInput) {
+        super(cidrToSnm(ipInput));
     }
 
+    public static SubnetMask fromCidrSuffix(Integer cidrSuffix) {
+        Objects.requireNonNull(cidrSuffix);
 
+        String snmFromCidrSuffix = cidrToSnm(cidrSuffix);
+
+        return new SubnetMask(snmFromCidrSuffix);
+    }
 
     public int writeCidr() {
         String resultBinary = this.toBinaryString();
@@ -88,7 +97,7 @@ public class SubnetMask extends IpAddress {
         return false;
     }
 
-    private String cidrToSnm(int cidr){
+    public static String cidrToSnm(int cidr){
         if (cidr < 0 || cidr > 32){
             throw new IllegalArgumentException("CIDR is out of bounds!");
         }
@@ -114,7 +123,7 @@ public class SubnetMask extends IpAddress {
         return cidrString;
     }
 
-    private int calcCidrOctet(int cidr){
+    private static int calcCidrOctet(int cidr){
         int rest = cidr % 8;
         return (int)(256 - Math.pow(2, (8-rest)));
     }

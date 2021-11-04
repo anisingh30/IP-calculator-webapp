@@ -1,17 +1,18 @@
 package academy.mischok.ipcalculatorwebapp.web.forms;
 
 import javax.validation.constraints.NotBlank;
+import java.util.Objects;
 
 public class NetworkInputForm {
 
-    //@NotBlank
+    @NotBlank
     private String ipAddress;
 
     //@NotBlank
     private String subNetMask;
 
     //@NotBlank
-    private int cidr;
+    private Integer cidr;
 
     public String getIpAddress() {
         return ipAddress;
@@ -29,11 +30,11 @@ public class NetworkInputForm {
         this.subNetMask = subNetMask;
     }
 
-    public int getCidr() {
+    public Integer getCidr() {
         return cidr;
     }
 
-    public void setCidr(int cidr) {
+    public void setCidr(Integer cidr) {
         this.cidr = cidr;
     }
 
