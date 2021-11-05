@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8" xmlns:th="www.thymelaeaf.org">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
     <title>IP Calculator</title>
 
     <link rel="stylesheet" href="style.css"/>
@@ -27,7 +28,7 @@
                 </div>
             </div>
 
-            <div id="id">
+            <div th:styleappend="${networkInputForm.cidr != null ? 'display:none' : ''}" id="id">
                 <label for="subnetMask">Subnetmask:</label>
                 <input id="subnetMask" th:field="*{subNetMask}" onfocus="hideCidrInput()" placeholder="Enter Subnetmask" name="subNetMask" type="text" autocomplete="on" />
                 <div id="fieldErrorSnm-id" class="fielderror-container" th:if="${#fields.hasErrors('subNetMask')}">
@@ -42,9 +43,9 @@
         </form>
         <script>
             function resetForm() {
-                document.getElementById("form-ID").reset();
-                clearFields();
                 showInputs();
+                clearInputs();
+                clearFields();
             }
 
             function clearFields() {
