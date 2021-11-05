@@ -11,7 +11,7 @@
 <div class="div-center" style="width:380px;">
     <h1>IP-Calculator</h1>
     <div>
-        <form method="post" action="input" th:object="${networkInputForm}">
+        <form id="form-ID" method="post" action="input" th:object="${networkInputForm}">
             <div>
                 <label for="ipAddress">Ip-Address:</label>
                 <input id="ipAddress" th:field="*{ipAddress}" placeholder="Enter IP Address" name="ipAddress" type="text" autofocus autocomplete="on" />
@@ -37,24 +37,30 @@
 
             <div>
                 <button type="submit" value="Submit">Submit</button>
-                <button type="button" onclick="clearInputs()" value="Reset">Reset</button>
+                <button type="button" onclick="resetForm()" value="Reset">Reset</button>
             </div>
         </form>
         <script>
-            function clearInputs() {
+            function resetForm() {
+                document.getElementById("form-ID").reset();
+                clearFields();
+                showInputs();
+            }
+
+            function clearFields() {
+                document.getElementById("fieldErrorSnm-id").style.display = "none";
+                document.getElementById("fieldErrorCidr-id").style.display = "none";
+                document.getElementById("fieldErrorIp-id").style.display = "none";
+            }
+            function showInputs(){
                 document.getElementById("id").style.display = "";
                 document.getElementById("cidr").style.display = "";
                 document.getElementById("cidrLabel").style.display = "";
-                document.getElementById("fieldErrorIp-id").style.display = "none";
-                document.getElementById("fieldErrorCidr-id").style.display = "none";
-                document.getElementById("fieldErrorSnm-id").style.display = "none";
-
-
             }
-            function clear(){
+            function clearInputs(){
                 document.getElementById("ipAddress").value = "";
                 document.getElementById("cidr").value = "";
-                document.getElementById("subNetMask").value = "";
+                document.getElementById("subnetMask").value = "";
             }
             function hideSnmInput(){
                 document.getElementById("id").style.display = "none";
@@ -66,9 +72,14 @@
                 document.getElementById("cidr").style.display = "none";
                 document.getElementById("cidrLabel").style.display = "none";
             }
-            f
         </script>
     </div>
 </div>
 </body>
 </html>
+
+<!--function clear(){-->
+
+
+
+<!--}-->
