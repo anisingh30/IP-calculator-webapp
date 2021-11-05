@@ -46,6 +46,7 @@ div{
 }
 
 input {
+    width:50px;
     border-radius: 5px;
     font-family: 'PT Serif', serif;
 }

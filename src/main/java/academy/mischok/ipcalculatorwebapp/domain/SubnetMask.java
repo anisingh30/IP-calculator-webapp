@@ -15,6 +15,9 @@ public class SubnetMask extends IpAddress {
     }
 
     public static SubnetMask fromCidrSuffix(Integer cidrSuffix) {
+        if (Objects.isNull(cidrSuffix)){
+            throw new IllegalArgumentException("CIDR is out of bounds!");
+        }
         Objects.requireNonNull(cidrSuffix);
 
         String snmFromCidrSuffix = cidrToSnm(cidrSuffix);
@@ -98,7 +101,7 @@ public class SubnetMask extends IpAddress {
     }
 
     public static String cidrToSnm(int cidr){
-        if (cidr < 0 || cidr > 32){
+        if ( cidr < 0 || cidr > 32){
             throw new IllegalArgumentException("CIDR is out of bounds!");
         }
         String cidrString = "";

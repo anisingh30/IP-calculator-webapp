@@ -43,6 +43,7 @@ public class NetworkInputForm {
         return "NetworkInputForm{" +
                 "ipAddress='" + ipAddress + '\'' +
                 ", subNetMask='" + subNetMask + '\'' +
+                ", cidr='" + cidr + '\'' +
                 '}';
     }
 }

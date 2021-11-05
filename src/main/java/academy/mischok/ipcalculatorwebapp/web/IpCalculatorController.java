@@ -25,7 +25,8 @@ public class IpCalculatorController {
             bindingResult.rejectValue("ipAddress", "invalid.snmCidr", "Please insert just the CIDR or the Subnetmask.");
         }
 
-        validate(networkInputForm, bindingResult);
+        //noinspection ConstantConditions
+        bindingResult = validateInputAndUpdateBindingResult(networkInputForm, bindingResult);
 
         if (bindingResult.hasErrors()) {
             return "inputTemplate";
@@ -65,7 +66,7 @@ public class IpCalculatorController {
         }
     }
 
-    private void validate(NetworkInputForm networkInputForm, BindingResult bindingResult) {
+    private BindingResult validateInputAndUpdateBindingResult(NetworkInputForm networkInputForm, BindingResult bindingResult) {
         Objects.requireNonNull(networkInputForm);
         Objects.requireNonNull(bindingResult);
 
@@ -77,21 +78,28 @@ public class IpCalculatorController {
             }
         }
 
-        if (!bindingResult.hasFieldErrors("subNetMask") && networkInputForm.getSubNetMask() != "")  {
+        if (!bindingResult.hasFieldErrors("subNetMask") && Objects.isNull(networkInputForm.getCidr()))  {
             try {
                 new SubnetMask(networkInputForm.getSubNetMask());
             } catch (IllegalArgumentException e) {
-                bindingResult.rejectValue("subNetMask", "invalid.subNetMask", "Subnetmask not valid.");
+                if(networkInputForm.getSubNetMask() == ""){
+                    bindingResult.rejectValue("subNetMask", "invalid.subNetMask", "Subnetmask null not valid.");
+                }
+                else{
+                    bindingResult.rejectValue("subNetMask", "invalid.subNetMask", "Subnetmask not valid.");
+                }
             }
         }
 
-        if (!bindingResult.hasFieldErrors("cidr") && !Objects.isNull(networkInputForm.getCidr())) {
+        if (!bindingResult.hasFieldErrors("cidr") && networkInputForm.getSubNetMask() == "") {
             try {
-                new SubnetMask(networkInputForm.getCidr());
+                SubnetMask.fromCidrSuffix(networkInputForm.getCidr());
             } catch (IllegalArgumentException e) {
-                bindingResult.rejectValue("cidr", "invalid.cidr", "Cidr not valid.");
+                bindingResult.rejectValue("cidr", "invalid.cidr", "Cidr " + networkInputForm.getCidr() + " not valid." );
             }
         }
+
+        return bindingResult;
     }
 
     @GetMapping("input")

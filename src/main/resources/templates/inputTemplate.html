@@ -2,6 +2,7 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8" xmlns:th="www.thymelaeaf.org">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>IP Calculator</title>
 
     <link rel="stylesheet" href="style.css"/>
@@ -9,33 +10,64 @@
 <body>
 <div class="div-center" style="width:380px;">
     <h1>IP-Calculator</h1>
-<div>
+    <div>
         <form method="post" action="input" th:object="${networkInputForm}">
             <div>
                 <label for="ipAddress">Ip-Address:</label>
                 <input id="ipAddress" th:field="*{ipAddress}" placeholder="Enter IP Address" name="ipAddress" type="text" autofocus autocomplete="on" />
 
-                <label style="width:6px" for="cidr">/</label>
-                <input style="width:25px" id="cidr" th:field="*{cidr}" placeholder="--" name="cidr" type="text" autocomplete="on">
+                <label style="width:6px" for="cidr" id="cidrLabel">/</label>
+                <input style="width:25px" id="cidr" th:field="*{cidr}" placeholder="--" onfocus="hideSnmInput()" name="cidr" type="text" autocomplete="on">
 
-                <div class="fielderror-container" th:if="${#fields.hasErrors('ipAddress')}">
-                    <div class="fielderror-detail" th:each="err : ${#fields.errors('ipAddress')}" th:text="${err}"></div>
+                <div id="fieldErrorIp-id" class="fielderror-container" th:if="${#fields.hasErrors('ipAddress')}">
+                    <div  class="fielderror-detail" th:each="err : ${#fields.errors('ipAddress')}" th:text="${err}" ></div>
+                </div>
+                <div id="fieldErrorCidr-id" class="fielderror-container" th:if="${#fields.hasErrors('cidr')}">
+                    <div class="fielderror-detail" th:each="err : ${#fields.errors('cidr')}" th:text="${err}"></div>
                 </div>
             </div>
 
-            <div>
+            <div id="id">
                 <label for="subnetMask">Subnetmask:</label>
-                <input id="subnetMask" th:field="*{subNetMask}" placeholder="Enter Subnetmask" name="subNetMask" type="text" autocomplete="on" />
-                <div class="fielderror-container" th:if="${#fields.hasErrors('subNetMask')}">
+                <input id="subnetMask" th:field="*{subNetMask}" onfocus="hideCidrInput()" placeholder="Enter Subnetmask" name="subNetMask" type="text" autocomplete="on" />
+                <div id="fieldErrorSnm-id" class="fielderror-container" th:if="${#fields.hasErrors('subNetMask')}">
                     <div class="fielderror-detail" th:each="err : ${#fields.errors('subNetMask')}" th:text="${err}"></div>
                 </div>
             </div>
 
             <div>
                 <button type="submit" value="Submit">Submit</button>
-                <button type="reset" value="Reset">Reset</button>
+                <button type="button" onclick="clearInputs()" value="Reset">Reset</button>
             </div>
         </form>
+        <script>
+            function clearInputs() {
+                document.getElementById("id").style.display = "";
+                document.getElementById("cidr").style.display = "";
+                document.getElementById("cidrLabel").style.display = "";
+                document.getElementById("fieldErrorIp-id").style.display = "none";
+                document.getElementById("fieldErrorCidr-id").style.display = "none";
+                document.getElementById("fieldErrorSnm-id").style.display = "none";
+
+
+            }
+            function clear(){
+                document.getElementById("ipAddress").value = "";
+                document.getElementById("cidr").value = "";
+                document.getElementById("subNetMask").value = "";
+            }
+            function hideSnmInput(){
+                document.getElementById("id").style.display = "none";
+            }
+            function showSnmInput(){
+                document.getElementById("id").style.display = "block";
+            }
+            function hideCidrInput(){
+                document.getElementById("cidr").style.display = "none";
+                document.getElementById("cidrLabel").style.display = "none";
+            }
+            f
+        </script>
     </div>
 </div>
 </body>
